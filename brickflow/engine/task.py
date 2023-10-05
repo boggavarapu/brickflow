@@ -134,7 +134,7 @@ class StorageBasedTaskLibrary(TaskLibrary):
     def __post_init__(self) -> None:
         storage_lib = dataclasses.asdict(self)
         for _, v in storage_lib.items():
-            self.validate_starts_with_values(v, ["dbfs:/", "s3://"])
+            self.validate_starts_with_values(v, ["dbfs:/", "s3://", "/Users"])
 
 
 @dataclass(frozen=True)
