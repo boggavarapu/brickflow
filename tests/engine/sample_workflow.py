@@ -4,6 +4,8 @@ from brickflow.engine.task import (
     TaskType,
     TaskResponse,
     DLTPipeline,
+    JarTaskLibrary,
+    SparkJarTask,
 )
 from brickflow.engine.workflow import Workflow, WorkflowPermissions, User
 
@@ -91,3 +93,12 @@ def task_function_4():
 )
 def custom_python_task_push():
     pass
+
+
+@wf.spark_jar_task(
+    depends_on="task_function_3", libraries=[JarTaskLibrary(jar="dbfs:/<location>.jar")]
+)
+def example_spark_jar():
+    return SparkJarTask(
+        main_class_name="com.example.Main",
+    )

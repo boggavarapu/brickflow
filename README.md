@@ -124,6 +124,12 @@ def example_notebook():
         },
     )
 
+@wf.spark_jar_task(depends_on=[start, example_notebook],libraries=[JarTaskLibrary(jar="dbfs:<location>.jar or s3://<location>.jar")])
+# this task runs a databricks jar
+def example_spark_jar():
+    return SparkJarTask(
+        main_class_name="com.example.Main",
+    )
 
 @wf.task(depends_on=[start, example_notebook])
 # this task runs a bash command
